@@ -41,7 +41,7 @@ connect(function(client){
         console.log('The delete one is :' , req.params.del);
         collection.deleteOne({a: parseInt(req.params.del)}, function(err, docs){
             res.send(docs);
-            console.log("data deletion is successful")
+            console.log("data.... deletion is successful")
             client.close();
         })
     })
