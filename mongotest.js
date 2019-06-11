@@ -28,14 +28,21 @@ MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
   });
 //JWT Sign
     app.get('/jwtSign', (req, res, next) => {
-      var id1 = {username: "verma8877", password: "658565"};
+      var id1 = {username: "verma8077", password: "123456"};
     jwt.sign(id1, '%^FTGYHUBHJIY',{ expiresIn: 60*60 }, function(err, token) {
       collection.findOne({username : id1.username}, function(err,match){
         console.log(match, typeof(match));
-        if(match.password == id1.password)
-          res.send(token);
-        else
-          res.status(401).send("credentials error, please try again....");
+        if(match!==null){
+          if(match.password == id1.password){
+            res.send(token);
+          }
+          else{
+            res.status(401).send("credentials error, please try again....");
+          }
+        }
+        else{
+          res.status(404).send("user does not exist");
+        }
       });
     });
   });
